@@ -1,0 +1,44 @@
+:root {
+  
+    color-scheme: light dark;
+  --bg: light-dark(#ffffff, #121212);
+  --text: light-dark(#1a1a1a, #eeeeee);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body {
+
+    background-color:  var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 120px;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-size: 9rem;
+    line-height: 120%;
+}
+
+button {
+    margin-top: 40px ;
+    padding: 10px;
+    border-radius: 6px;
+    color: var(--text);
+    background-color:  var(--bg);
+}
+
+button:hover {
+
+    background-color: rgb(211, 208, 208);
+
+}
+

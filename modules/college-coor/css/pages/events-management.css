@@ -1,0 +1,377 @@
+/**
+ * Events Management Styling
+ */
+
+/* Statistics Cards */
+.stat-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.stat-card .card-body {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-icon.total {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-icon.upcoming {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-icon.ongoing {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-icon.completed {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.stat-card .h6 {
+    color: #666;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card .h3 {
+    color: #222;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Filter Card */
+.filter-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.filter-card .card-body {
+    padding: 1.25rem;
+}
+
+.filter-card .form-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.filter-card .form-control,
+.filter-card .form-select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.filter-card .form-control:focus,
+.filter-card .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+}
+
+/* Events Table */
+#eventsTable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#eventsTable thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: 600;
+    color: #333;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+#eventsTable tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+#eventsTable tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+#eventsTable tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: #555;
+}
+
+#eventsTable tbody td strong {
+    color: #222;
+}
+
+#eventsTable tbody td small {
+    color: #888;
+    line-height: 1.5;
+}
+
+/* Badges */
+.badge {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 20px;
+}
+
+.badge.bg-info {
+    background-color: #e3f2fd !important;
+    color: #1976d2;
+}
+
+.badge.bg-warning {
+    background-color: #fff3e0 !important;
+    color: #f57c00;
+}
+
+.badge.bg-success {
+    background-color: #e8f5e9 !important;
+    color: #388e3c;
+}
+
+.badge.bg-danger {
+    background-color: #ffebee !important;
+    color: #d32f2f;
+}
+
+/* Buttons */
+.btn-warning,
+.btn-danger {
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+}
+
+.modal-header .modal-title {
+    font-weight: 600;
+    color: #222;
+    font-size: 1.1rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body .form-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-body .form-control,
+.modal-body .form-select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+}
+
+.modal-body textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.modal-footer {
+    border-top: 1px solid #e0e0e0;
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+}
+
+/* Toast */
+#toastContainer .toast {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1rem;
+    min-width: 300px;
+}
+
+#toastContainer .toast-body {
+    padding: 1rem;
+}
+
+#toastContainer .btn-close {
+    opacity: 0.8;
+}
+
+#toastContainer .btn-close:hover {
+    opacity: 1;
+}
+
+/* Page Header */
+main > div:first-child {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+main > div:first-child .h3 {
+    color: #222;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+main > div:first-child .text-muted {
+    color: #888 !important;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: #667eea;
+    border-color: #667eea;
+    border-radius: 8px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #5568d3;
+    border-color: #5568d3;
+}
+
+/* Card Styling */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 1.5rem;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-header .h5 {
+    color: #222;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stat-card .h3 {
+        font-size: 1.75rem;
+    }
+    
+    .filter-card .row {
+        flex-direction: column;
+    }
+    
+    #eventsTable {
+        font-size: 0.85rem;
+    }
+    
+    #eventsTable thead th,
+    #eventsTable tbody td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+    }
+    
+    main {
+        padding: 1rem 0.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .row > .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .btn {
+        margin-bottom: 0.5rem;
+    }
+    
+    #eventsTable {
+        font-size: 0.8rem;
+    }
+    
+    #eventsTable thead th {
+        padding: 0.5rem;
+    }
+    
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+    
+    .stat-card .h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Loading state */
+.spinner-border {
+    color: #667eea;
+}
+
+/* Empty state */
+.text-muted i {
+    opacity: 0.5;
+}

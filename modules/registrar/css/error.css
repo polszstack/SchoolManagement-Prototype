@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+    transition: all 0.3s ease;
+}
+
+h1 {
+
+    font-size: 9rem;
+    margin-bottom: 40px;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 40px;
+}
+
+a {
+    padding: 10px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    border-radius: 4px;
+    box-shadow: 0 5px rgb(70, 68, 68); 
+    transition: 0.1s;
+    cursor: pointer;
+}
+    
+
+a:hover {
+    background-color: rgb(211, 208, 208);
+}
+
+a:active {
+  box-shadow: 0 2px rgb(70, 68, 68); /* Smaller shadow */
+  transform: translateY(3px); 
+}
+

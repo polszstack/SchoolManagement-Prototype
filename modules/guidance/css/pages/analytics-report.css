@@ -1,0 +1,201 @@
+/* ==========================================================================
+   analytics-reports.css
+   Module: Analytics & Reports
+   Naming convention: classes -> rprt-component-name, ids -> rprtComponentName
+   Only root variables are used. Buttons use --color1 (solid, white text).
+   ========================================================================== */
+
+.module-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 4px 0 32px 0;
+}
+
+/* ---------- Breakdown mini-charts ---------- */
+.rprt-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.rprt-breakdown-card {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+.rprt-breakdown-card h3 {
+    margin: 0 0 14px;
+    font-size: 14px;
+    color: var(--color2);
+}
+
+.rprt-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.rprt-bar-label {
+    font-size: 12px;
+    color: var(--color5);
+    width: 90px;
+    flex-shrink: 0;
+}
+.rprt-bar-track {
+    flex: 1;
+    height: 10px;
+    background: var(--color9);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.rprt-bar-fill {
+    height: 100%;
+    background: var(--color1);
+    border-radius: 999px;
+}
+.rprt-bar-fill--severity {
+    background: var(--color10);
+}
+.rprt-bar-value {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color2);
+    width: 24px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* ---------- Report generator ---------- */
+.rprt-generator {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.rprt-generator__header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color9);
+}
+.rprt-generator__header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color2);
+}
+
+.rprt-generator__controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color9);
+}
+
+.rprt-filter-select,
+.rprt-filter-date {
+    border: 1px solid var(--color4);
+    border-radius: 7px;
+    padding: 7px 10px;
+    font-size: 13px;
+    color: var(--color2);
+    background: var(--color3);
+}
+
+.rprt-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.rprt-filter-sep {
+    font-size: 12px;
+    color: var(--color5);
+}
+
+.rprt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+    transition: opacity .15s ease;
+}
+.rprt-btn:hover { opacity: .88; }
+.rprt-btn--ghost { background: transparent; color: var(--color5); border: 1px solid var(--color4); }
+.rprt-btn--sm { padding: 7px 14px; font-size: 12px; }
+.rprt-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.rprt-generator__actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--color9);
+    background: var(--color9);
+}
+
+/* ---------- Results table ---------- */
+.rprt-results-wrapper {
+    padding: 16px 18px;
+}
+
+.rprt-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+}
+
+.rprt-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.rprt-table thead th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--color5);
+    background: var(--color9);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color4);
+    white-space: nowrap;
+}
+.rprt-table tbody td {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color2);
+    border-bottom: 1px solid var(--color9);
+    white-space: nowrap;
+}
+.rprt-table tbody tr:hover { background: var(--color9); }
+
+.rprt-results-count {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--color5);
+}
+
+.rprt-empty {
+    text-align: center;
+    padding: 32px 0;
+    color: var(--color5);
+    font-size: 13px;
+}
+
+@media (max-width: 1000px) {
+    .rprt-breakdown-grid { grid-template-columns: 1fr; }
+}
+
+/* Print: hide everything except the results table */
+@media print {
+    .module-header, .rprt-breakdown-grid, .rprt-generator__header,
+    .rprt-generator__controls, .rprt-generator__actions {
+        display: none !important;
+    }
+}

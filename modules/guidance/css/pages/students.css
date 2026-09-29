@@ -1,0 +1,640 @@
+/* ==========================================================================
+   students.css
+   Module: Student Profile Management (Guidance Office)
+   Naming convention:
+     - classes  -> std-component-name
+     - ids      -> stdComponentName
+   Only variables from the global :root are used. Buttons use --color1.
+   ========================================================================== */
+
+/* ---------- Layout ---------- */
+.module-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 4px 0 32px 0;
+}
+
+/* ---------- Stat summary cards ---------- */
+.std-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.std-stat-card {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.std-stat-card__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--color5);
+}
+
+.std-stat-card__value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color2);
+}
+
+.std-stat-card--high .std-stat-card__value { color: var(--color10); }
+.std-stat-card--accent .std-stat-card__value { color: var(--color1); }
+
+/* ---------- Toolbar ---------- */
+.std-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 8px 12px;
+    overflow-x: auto;
+}
+
+.std-toolbar__filters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.std-search-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color9);
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    padding: 6px 10px;
+    flex: 1 1 160px;
+    min-width: 140px;
+    max-width: 220px;
+}
+
+.std-search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--color2);
+    width: 100%;
+}
+
+.std-search-box svg,
+.std-search-box i {
+    color: var(--color5);
+    flex-shrink: 0;
+}
+
+.std-filter-select {
+    border: 1px solid var(--color4);
+    border-radius: 7px;
+    padding: 6px 8px;
+    font-size: 12px;
+    color: var(--color2);
+    background: var(--color3);
+    flex: 1 1 100px;
+    min-width: 0;
+}
+
+.std-toolbar__actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* ---------- Buttons ---------- */
+.std-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+    transition: opacity .15s ease;
+}
+
+.std-btn:hover { opacity: .88; }
+
+.std-btn--outline {
+    background: var(--color1);
+    color: var(--color3);
+    border: 1px solid var(--color1);
+}
+
+.std-btn--ghost {
+    background: transparent;
+    color: var(--color5);
+    border: 1px solid var(--color4);
+}
+
+.std-btn--sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.std-btn--danger {
+    background: var(--color10);
+    color: var(--color3);
+}
+
+.std-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* ---------- Table ---------- */
+.std-table-wrapper {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.std-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.std-table thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--color5);
+    background: var(--color3);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color9);
+    border-radius: 10px;
+}
+
+.std-table tbody td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--color2);
+    border-bottom: 1px solid var(--color9);
+    vertical-align: middle;
+}
+
+.std-table tbody tr:hover {
+    background: var(--color9);
+}
+
+.std-table__student-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.std-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color1);
+    color: var(--color3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.std-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.std-table__name {
+    font-weight: 600;
+    color: var(--color2);
+}
+
+.std-table__subtext {
+    font-size: 12px;
+    color: var(--color5);
+}
+
+.std-table__empty {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--color5);
+    font-size: 14px;
+}
+
+/* ---------- Badges ---------- */
+.std-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.std-badge--risk-low { background: rgba(51,65,85,.1); color: var(--color6); }
+.std-badge--risk-moderate { background: rgba(81,70,183,.12); color: var(--color7); }
+.std-badge--risk-high { background: rgba(229,62,62,.12); color: var(--color10); }
+
+.std-badge--status-active { background: rgba(81,70,183,.12); color: var(--color7); }
+.std-badge--status-monitoring { background: rgba(186,186,186,.25); color: var(--color5); }
+.std-badge--status-closed { background: rgba(51,65,85,.1); color: var(--color6); }
+
+/* ---------- Pagination ---------- */
+.std-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px;
+    font-size: 13px;
+    color: var(--color5);
+}
+
+.std-pagination__pages {
+    display: flex;
+    gap: 6px;
+}
+
+.std-pagination__page {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--color4);
+    background: var(--color3);
+    color: var(--color2);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.std-pagination__page--active {
+    background: var(--color1);
+    color: var(--color3);
+    border-color: var(--color1);
+}
+
+/* ---------- Profile Modal ---------- */
+.std-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.std-modal-overlay--open { display: flex; }
+
+.std-modal {
+    background: var(--color3);
+    width: 860px;
+    max-width: 94vw;
+    height: 640px;
+    max-height: 88vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.std-modal__header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--color9);
+}
+
+.std-modal__title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.std-modal__title h2 {
+    font-size: 16px;
+    color: var(--color2);
+    margin: 0;
+}
+
+.std-modal__subtitle {
+    font-size: 12px;
+    color: var(--color5);
+}
+
+.std-modal__close {
+    background: transparent;
+    border: none;
+    color: var(--color5);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Tabs */
+.std-tabs {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 0 22px;
+    border-bottom: 1px solid var(--color9);
+    overflow-x: hidden;
+}
+
+.std-tab {
+    flex: 1 1 0;
+    text-align: center;
+    white-space: normal;
+    padding: 12px 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--color5);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.std-tab--active {
+    color: var(--color1);
+    border-bottom-color: var(--color1);
+}
+
+.std-modal__body {
+    flex: 1;
+    min-height: 0;
+    padding: 20px 22px;
+    overflow-y: auto;
+}
+
+.std-tab-panel { display: none; }
+.std-tab-panel--active { display: block; }
+
+/* Overview panel */
+.std-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 24px;
+}
+
+.std-profile-field__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--color5);
+    margin-bottom: 3px;
+}
+
+.std-profile-field__value {
+    font-size: 14px;
+    color: var(--color2);
+    font-weight: 500;
+}
+
+/* Remarks */
+.std-remarks-form textarea {
+    width: 100%;
+    min-height: 90px;
+    border: 1px solid var(--color4);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--color2);
+    resize: vertical;
+}
+
+.std-remarks-form__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.std-remarks-history {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.std-remark-item {
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.std-remark-item__meta {
+    font-size: 11px;
+    color: var(--color5);
+    margin-bottom: 4px;
+}
+
+.std-remark-item__text {
+    font-size: 13px;
+    color: var(--color2);
+}
+
+/* History list (counseling / referral / appointment / incident) */
+.std-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.std-history-item {
+    display: flex;
+    gap: 14px;
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.std-history-item__date {
+    min-width: 84px;
+    font-size: 12px;
+    color: var(--color5);
+    font-weight: 600;
+}
+
+.std-history-item__body { flex: 1; }
+
+.std-history-item__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color2);
+    margin-bottom: 2px;
+}
+
+.std-history-item__desc {
+    font-size: 12px;
+    color: var(--color5);
+}
+
+/* Case involvement summary (Overview tab quick-glance) */
+.std-case-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Cases tab: consolidated list, click-through to the Cases module */
+.std-case-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.std-case-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: background .12s ease;
+}
+.std-case-item:hover { background: var(--color9); }
+
+.std-case-item__type-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+/* Subtle color-coding per case_type — distinct from the status/priority badge palette */
+.std-case-item__type-icon--referral { background: rgba(81,70,183,.12); color: var(--color7); }
+.std-case-item__type-icon--walkin { background: rgba(51,65,85,.1); color: var(--color6); }
+.std-case-item__type-icon--self-referral { background: rgba(51,65,85,.1); color: var(--color6); }
+.std-case-item__type-icon--incident { background: rgba(229,62,62,.12); color: var(--color10); }
+
+.std-case-item__body { flex: 1; min-width: 0; }
+.std-case-item__number { font-size: 13px; font-weight: 700; color: var(--color1); }
+.std-case-item__meta { font-size: 12px; color: var(--color5); margin-top: 2px; }
+.std-case-item__badges { display: flex; gap: 6px; flex-shrink: 0; }
+.std-case-item__chevron { color: var(--color5); flex-shrink: 0; }
+
+.std-history-item__status {
+    align-self: flex-start;
+}
+
+/* Documents */
+.std-upload-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.std-upload-row select,
+.std-upload-row input[type="file"] {
+    border: 1px solid var(--color4);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    color: var(--color2);
+}
+
+/* Style just the native "Choose File" button portion to match .std-btn,
+   while leaving the "No file chosen" filename text as normal browser text */
+.std-upload-row input[type="file"]::file-selector-button {
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+    transition: opacity .15s ease;
+}
+.std-upload-row input[type="file"]::file-selector-button:hover {
+    opacity: .88;
+}
+/* Older WebKit fallback (Safari) */
+.std-upload-row input[type="file"]::-webkit-file-upload-button {
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+}
+
+.std-doc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.std-doc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.std-doc-item__info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.std-doc-item__name {
+    font-size: 13px;
+    color: var(--color2);
+    font-weight: 500;
+}
+
+.std-doc-item__meta {
+    font-size: 11px;
+    color: var(--color5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .std-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .std-profile-grid { grid-template-columns: 1fr; }
+}

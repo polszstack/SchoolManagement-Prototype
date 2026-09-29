@@ -1,0 +1,389 @@
+/* ============================================================
+   School Directress — Report Submission & Management
+   Independent styles
+   ============================================================ */
+
+.rsm-page {
+    width: 100%;
+}
+
+.rsm-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color3);
+    padding: 1.1rem 1.6rem;
+    border-radius: 10px;
+}
+
+.rsm-list-header h3 {
+    margin: 0;
+    color: var(--color2);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.rsm-header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.rsm-add-btn {
+    padding: 0.6rem 1.1rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.rsm-add-btn:hover {
+    background: var(--color7);
+}
+
+.rsm-form {
+    width: 100%;
+}
+
+.rsm-form-group {
+    margin-bottom: 0.9rem;
+}
+
+.rsm-form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--color2);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.rsm-form-group input[type="text"],
+.rsm-form-group select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 0.85rem;
+}
+
+.rsm-form-group input[type="text"]:focus,
+.rsm-form-group select:focus {
+    outline: none;
+    border-color: var(--color1);
+    box-shadow: 0 0 0 3px rgba(32, 0, 130, 0.08);
+}
+
+.rsm-file {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color5);
+    font-size: 0.82rem;
+}
+
+.rsm-file::file-selector-button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rsm-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.rsm-btn-submit,
+.rsm-btn-cancel,
+.rsm-btn-view {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0.65rem 1.3rem;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rsm-btn-submit {
+    border: none;
+    background: var(--color1);
+    color: var(--color3);
+}
+
+.rsm-btn-submit:hover {
+    background: var(--color7);
+}
+
+.rsm-btn-cancel {
+    border: 1px solid var(--color9);
+    background: var(--color3);
+    color: var(--color5);
+}
+
+.rsm-btn-cancel:hover {
+    border-color: var(--color5);
+    color: var(--color2);
+}
+
+.rsm-upload-progress {
+    margin-top: 0.8rem;
+}
+
+.rsm-progress-track {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--color9);
+}
+
+.rsm-progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--color1);
+}
+
+.rsm-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rsm-select,
+.rsm-search {
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 0.82rem;
+}
+
+.rsm-select {
+    width: 265px;
+}
+
+.rsm-search {
+    width: 280px;
+}
+
+.rsm-select:focus,
+.rsm-search:focus {
+    outline: none;
+    border-color: var(--color1);
+    box-shadow: 0 0 0 3px rgba(32, 0, 130, 0.08);
+}
+
+.rsm-search::placeholder {
+    color: var(--color5);
+}
+
+.rsm-table-wrapper {
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+.rsm-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color3);
+}
+
+.rsm-table th,
+.rsm-table td {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--color9);
+    text-align: left;
+}
+
+.rsm-table thead th {
+    color: var(--color5);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.rsm-table tbody td {
+    color: var(--color2);
+    font-size: 0.85rem;
+}
+
+.rsm-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.rsm-table tbody tr:hover {
+    background: rgba(32, 0, 130, 0.02);
+}
+
+.rsm-actions-cell {
+    text-align: center;
+}
+
+.rsm-btn-view {
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--color9);
+    background: var(--color3);
+    color: var(--color2);
+}
+
+.rsm-btn-view:hover {
+    border-color: var(--color1);
+    color: var(--color1);
+}
+
+.rsm-no-data td {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--color5);
+}
+
+.rsm-muted {
+    color: var(--color5);
+    font-size: 0.82rem;
+}
+
+/* ── Modal ─────────────────────────────────────────────── */
+
+.rsm-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.rsm-modal-overlay.active {
+    display: flex;
+}
+
+.rsm-modal {
+    width: 560px;
+    max-width: 92vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.rsm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.6rem;
+    border-bottom: 1px solid var(--color9);
+}
+
+.rsm-modal-header h3 {
+    margin: 0;
+    color: var(--color2);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.rsm-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color5);
+    cursor: pointer;
+}
+
+.rsm-modal-close:hover {
+    color: var(--color2);
+}
+
+.rsm-modal-body {
+    padding: 1.6rem;
+}
+
+@media (max-width: 900px) {
+    .rsm-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rsm-header-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rsm-filters {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .rsm-select,
+    .rsm-search {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .rsm-table {
+        min-width: 900px;
+    }
+}
+
+@media (max-width: 600px) {
+    .rsm-list {
+        padding: 1.1rem;
+    }
+
+    .rsm-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .rsm-select,
+    .rsm-search {
+        width: 100%;
+    }
+
+    .rsm-actions {
+        flex-direction: column;
+    }
+
+    .rsm-btn-submit,
+    .rsm-btn-cancel {
+        width: 100%;
+    }
+
+    .rsm-modal {
+        width: 94vw;
+    }
+}/* ============================================================
+   School Directress — Report Submission & Management
+   Independent styles
+   ============================================================ */
+

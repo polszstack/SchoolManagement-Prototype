@@ -1,0 +1,364 @@
+/* ==========================================================================
+   cases.css
+   Module: Case Management (Referral + Counseling)
+   Naming convention: classes -> case-component-name, ids -> caseComponentName
+   Only root variables are used. Buttons use --color1 (solid, white text).
+   ========================================================================== */
+
+.module-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 4px 0 32px 0;
+}
+
+/* ---------- Toolbar ---------- */
+.case-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 8px 12px;
+    overflow-x: auto;
+}
+
+.case-toolbar__filters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.case-search-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    padding: 6px 10px;
+    flex: 1 1 160px;
+    min-width: 140px;
+    max-width: 220px;
+}
+
+.case-search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--color3);
+    width: 100%;
+}
+
+.case-search-box i { color: var(--color5); flex-shrink: 0; }
+
+.case-filter-select {
+    border: 1px solid var(--color4);
+    border-radius: 7px;
+    padding: 6px 8px;
+    font-size: 12px;
+    color: var(--color2);
+    background: var(--color3);
+    flex: 1 1 100px;
+    min-width: 0;
+}
+
+.case-toolbar__actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+/* ---------- Buttons ---------- */
+.case-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+    transition: opacity .15s ease;
+}
+.case-btn:hover { opacity: .88; }
+.case-btn--ghost {
+    background: transparent;
+    color: var(--color5);
+    border: 1px solid var(--color4);
+}
+.case-btn--sm { padding: 6px 12px; font-size: 12px; }
+.case-btn--danger { background: var(--color10); color: var(--color3); }
+.case-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---------- Table ---------- */
+.case-table-wrapper {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.case-table { width: 100%; border-collapse: collapse; }
+
+.case-table thead th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--color5);
+    background: var(--color3);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color9);
+}
+
+.case-table tbody td {
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--color2);
+    border-bottom: 1px solid var(--color9);
+    vertical-align: middle;
+}
+
+.case-table tbody tr { cursor: pointer; }
+.case-table tbody tr:hover { background: var(--color9); }
+
+.case-number { font-weight: 600; color: var(--color1); }
+.case-student-name { font-weight: 600; color: var(--color2); }
+.case-student-sub { font-size: 12px; color: var(--color5); }
+.case-table__empty { text-align: center; padding: 40px 16px; color: var(--color5); font-size: 14px; }
+
+/* ---------- Badges ---------- */
+.case-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.case-badge--status-open { background: rgba(81,70,183,.12); color: var(--color7); }
+.case-badge--status-progress { background: rgba(186,186,186,.25); color: var(--color5); }
+.case-badge--status-closed { background: rgba(51,65,85,.1); color: var(--color6); }
+
+.case-badge--priority-low { background: rgba(51,65,85,.1); color: var(--color6); }
+.case-badge--priority-medium { background: rgba(81,70,183,.12); color: var(--color7); }
+.case-badge--priority-high { background: rgba(229,62,62,.12); color: var(--color10); }
+.case-badge--priority-critical { background: var(--color10); color: var(--color3); }
+
+.case-badge--referral-pending { background: rgba(186,186,186,.25); color: var(--color5); }
+.case-badge--referral-accepted { background: rgba(81,70,183,.12); color: var(--color7); }
+.case-badge--referral-rejected { background: rgba(229,62,62,.12); color: var(--color10); }
+
+/* ---------- Pagination ---------- */
+.case-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 4px;
+    font-size: 13px;
+    color: var(--color5);
+}
+.case-pagination__pages { display: flex; gap: 6px; }
+.case-pagination__page {
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--color4);
+    background: var(--color3);
+    color: var(--color2);
+    cursor: pointer;
+    font-size: 12px;
+}
+.case-pagination__page--active { background: var(--color1); color: var(--color3); border-color: var(--color1); }
+
+/* ---------- Slide-over Drawer ---------- */
+.case-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    display: none;
+    z-index: 900;
+}
+.case-overlay--open { display: block; }
+
+.case-drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 620px;
+    max-width: 92vw;
+    background: var(--color3);
+    box-shadow: -12px 0 40px rgba(0,0,0,.2);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+    z-index: 950;
+}
+.case-drawer--open { transform: translateX(0); }
+
+.case-drawer__header {
+    flex-shrink: 0;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color9);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.case-drawer__number { font-size: 12px; color: var(--color5); font-weight: 600; letter-spacing: .03em; }
+.case-drawer__title { font-size: 18px; margin: 2px 0 8px; color: var(--color2); }
+.case-drawer__badges { display: flex; gap: 6px; }
+.case-drawer__close { background: transparent; border: none; font-size: 20px; color: var(--color5); cursor: pointer; }
+
+.case-tabs {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--color9);
+    overflow-x: hidden;
+}
+.case-tab {
+    flex: 1 1 0;
+    text-align: center;
+    white-space: normal;
+    padding: 12px 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color5);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+.case-tab--active { color: var(--color1); border-bottom-color: var(--color1); }
+
+.case-drawer__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 20px 24px;
+}
+.case-tab-panel { display: none; }
+.case-tab-panel--active { display: block; }
+
+.case-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; margin-bottom: 20px; }
+.case-field-label { font-size: 11px; text-transform: uppercase; color: var(--color5); margin-bottom: 3px; }
+.case-field-value { font-size: 14px; font-weight: 500; color: var(--color2); }
+
+.case-quick-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+
+.case-summary-label { font-size: 11px; text-transform: uppercase; color: var(--color5); margin-bottom: 6px; }
+.case-summary-box {
+    background: var(--color9);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--color2);
+    white-space: pre-wrap;
+}
+
+.case-session-list { display: flex; flex-direction: column; gap: 10px; }
+.case-session-item { border: 1px solid var(--color9); border-radius: 8px; padding: 12px 14px; }
+.case-session-item__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; gap: 8px; }
+.case-session-item__date { font-size: 12px; font-weight: 700; color: var(--color5); flex-shrink: 0; }
+.case-session-item__type { font-size: 13px; font-weight: 600; color: var(--color2); }
+.case-session-item__notes { font-size: 12.5px; color: var(--color5); }
+.case-session-item__recommendations { font-size: 12.5px; color: var(--color2); margin-top: 6px; }
+.case-session-item__next { font-size: 11px; color: var(--color7); margin-top: 6px; font-weight: 600; }
+.case-session-item__actions { margin-top: 8px; display: flex; gap: 6px; }
+
+.case-record-btn-row { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+.case-empty-state { text-align: center; color: var(--color5); font-size: 13px; padding: 40px 0; }
+
+/* ---------- Modals (Create Case / Submit Referral / Record Session / Assign Counselor / Status) ---------- */
+.case-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.case-modal-overlay--open { display: flex; }
+
+.case-modal {
+    background: var(--color3);
+    width: 520px;
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.case-modal > form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+.case-modal__header {
+    flex-shrink: 0;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.case-modal__header h3 { margin: 0; font-size: 15px; color: var(--color2); }
+.case-modal__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.case-form-group label {
+    font-size: 12px;
+    color: var(--color5);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.case-form-group select,
+.case-form-group input,
+.case-form-group textarea {
+    width: 100%;
+    border: 1px solid var(--color4);
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--color2);
+}
+.case-form-group textarea { min-height: 70px; resize: vertical; }
+.case-form-group--hidden { display: none; }
+
+.case-modal__footer {
+    flex-shrink: 0;
+    padding: 14px 20px;
+    border-top: 1px solid var(--color9);
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .case-field-grid { grid-template-columns: 1fr; }
+    .case-drawer { width: 100vw; }
+}

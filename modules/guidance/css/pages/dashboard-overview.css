@@ -1,0 +1,161 @@
+/* ==========================================================================
+   dashboard-overview.css
+   Module: Dashboard Overview
+   Naming convention: classes -> dshbrd-component-name, ids -> dshbrdComponentName
+   Only root variables are used. Buttons use --color1 (solid, white text).
+   ========================================================================== */
+
+.module-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 4px 0 32px 0;
+}
+
+/* ---------- Stat cards ---------- */
+.dshbrd-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.dshbrd-stat-card {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dshbrd-stat-card__label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--color5);
+}
+
+.dshbrd-stat-card__value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color2);
+}
+
+.dshbrd-stat-card--accent .dshbrd-stat-card__value { color: var(--color1); }
+.dshbrd-stat-card--high .dshbrd-stat-card__value { color: var(--color10); }
+
+.dshbrd-stat-card--action {
+    justify-content: space-between;
+    background: var(--color9);
+    border-style: dashed;
+}
+
+/* ---------- Buttons ---------- */
+.dshbrd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--color1);
+    color: var(--color3);
+    text-decoration: none;
+    transition: opacity .15s ease;
+    width: fit-content;
+}
+.dshbrd-btn:hover { opacity: .88; }
+.dshbrd-btn--sm { padding: 7px 14px; font-size: 12px; }
+
+/* ---------- Widget grid ---------- */
+.dshbrd-widget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.dshbrd-widget {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.dshbrd-widget__header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--color9);
+    background: var(--color9);
+}
+.dshbrd-widget__header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color2);
+}
+
+.dshbrd-widget__body {
+    padding: 10px 18px;
+    display: flex;
+    flex-direction: column;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.dshbrd-list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color9);
+}
+.dshbrd-list-item:last-child { border-bottom: none; }
+
+.dshbrd-list-item__time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color5);
+    min-width: 56px;
+    flex-shrink: 0;
+}
+
+.dshbrd-list-item__body { flex: 1; min-width: 0; }
+.dshbrd-list-item__title { font-size: 13px; font-weight: 600; color: var(--color2); }
+.dshbrd-list-item__sub { font-size: 12px; color: var(--color5); }
+
+.dshbrd-empty {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--color5);
+    font-size: 13px;
+}
+
+/* ---------- Badges ---------- */
+.dshbrd-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(81,70,183,.12);
+    color: var(--color7);
+    flex-shrink: 0;
+}
+.dshbrd-badge--high-risk { background: rgba(229,62,62,.12); color: var(--color10); }
+.dshbrd-badge--severity-minor { background: rgba(51,65,85,.1); color: var(--color6); }
+.dshbrd-badge--severity-moderate { background: rgba(81,70,183,.12); color: var(--color7); }
+.dshbrd-badge--severity-major { background: rgba(229,62,62,.12); color: var(--color10); }
+.dshbrd-badge--severity-critical { background: var(--color10); color: var(--color3); }
+
+@media (max-width: 1100px) {
+    .dshbrd-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+    .dshbrd-widget-grid { grid-template-columns: 1fr; }
+}

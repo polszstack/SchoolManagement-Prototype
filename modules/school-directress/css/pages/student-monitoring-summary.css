@@ -1,0 +1,107 @@
+/* Student Monitoring Summary (MVP) */
+
+.sms-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-top: 16px;
+    background-color: var(--color3);
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color4);
+}
+
+.sms-filters label {
+    display: block;
+    color: var(--color2);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.sms-filters select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--color4);
+    background: var(--color3);
+    color: var(--color2);
+}
+
+.sms-summary-cards {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.card {
+    background: var(--color3);
+    border: 1px solid var(--color4);
+    padding: 12px 14px;
+    border-radius: 8px;
+    min-width: 160px;
+}
+
+.card-title {
+    font-size: 0.85rem;
+    color: var(--color2);
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.card-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color2);
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background: var(--color3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.summary-table th,
+.summary-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--color4);
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.summary-table thead th {
+    font-weight: 700;
+    color: var(--color2);
+}
+
+.sms-note {
+    margin-top: 12px;
+}
+
+.muted {
+    color: var(--color5);
+}
+
+@media (max-width: 880px) {
+    .sms-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sms-summary-cards {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .card {
+        min-width: 140px;
+    }
+
+    .summary-table th,
+    .summary-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+} 

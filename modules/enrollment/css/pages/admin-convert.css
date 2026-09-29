@@ -1,0 +1,391 @@
+/* Admin Convert to Student Page Styles */
+
+/* Student Cards */
+.student-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.student-card .card-header {
+    padding: 1rem;
+    border: none;
+}
+
+.student-card .card-header.bg-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+}
+
+.student-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.student-card .card-text {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.student-card .card-text i {
+    width: 20px;
+    color: #3498db;
+}
+
+.student-card .btn-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border: none;
+    border-radius: 30px;
+    padding: 0.6rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.student-card .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+}
+
+/* Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal-header {
+    border: none;
+    padding: 1.5rem;
+}
+
+.modal-header.bg-success {
+    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+}
+
+.modal-header.bg-warning {
+    background: linear-gradient(135deg, #f39c12, #e67e22) !important;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 1.5rem;
+}
+
+/* Applicant Name in Modal */
+#applicant_name {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Form Controls */
+.form-select-lg, .form-select {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-select-lg:focus, .form-select:focus {
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+}
+
+.form-label {
+    color: #2c3e50;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Section Loading Spinner */
+.section-loading {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.section-loading .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+}
+
+.section-loading p {
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* Section Select Container */
+.section-select-container {
+    display: block;
+}
+
+/* Section Options */
+#section_id option:disabled {
+    color: #e74c3c;
+    background-color: #fdf2f2;
+}
+
+#section_id option:not(:disabled) {
+    color: #2ecc71;
+}
+
+/* Section Info */
+#section-info {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+/* Alert Styles */
+.alert {
+    border: none;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border-left: 4px solid #2ecc71;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    border-left: 4px solid #e74c3c;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    color: #0c5460;
+    border-left: 4px solid #3498db;
+}
+
+.alert-info .btn-primary {
+    background-color: #3498db;
+    border: none;
+    border-radius: 30px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+}
+
+.alert-info .btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* Notification System */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.notification {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    animation: slideIn 0.3s ease;
+}
+
+.notification i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.notification-success {
+    border-left: 4px solid #2ecc71;
+}
+
+.notification-success i {
+    color: #2ecc71;
+}
+
+.notification-error {
+    border-left: 4px solid #e74c3c;
+}
+
+.notification-error i {
+    color: #e74c3c;
+}
+
+.notification-info {
+    border-left: 4px solid #3498db;
+}
+
+.notification-info i {
+    color: #3498db;
+}
+
+.notification.fade-in {
+    animation: slideIn 0.3s ease;
+}
+
+.notification.fade-out {
+    animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Applicant Preview Modal */
+#previewModal .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.applicant-preview h6 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.applicant-preview p {
+    margin-bottom: 0.5rem;
+    color: #7f8c8d;
+}
+
+.applicant-preview p strong {
+    color: #2c3e50;
+    width: 120px;
+    display: inline-block;
+}
+
+.applicant-preview ul {
+    margin: 0;
+    padding: 0;
+}
+
+.applicant-preview ul li {
+    padding: 0.3rem 0;
+    color: #7f8c8d;
+}
+
+.applicant-preview ul li i {
+    margin-right: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .student-card {
+        margin-bottom: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .form-select-lg, .form-select {
+        font-size: 1rem;
+    }
+    
+    .notification {
+        min-width: 250px;
+        padding: 0.75rem 1rem;
+    }
+    
+    .applicant-preview p strong {
+        width: 100px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .btn,
+    .modal,
+    .notification-container,
+    .student-card .btn-success {
+        display: none !important;
+    }
+    
+    .student-card {
+        box-shadow: none;
+        border: 1px solid #dee2e6;
+        break-inside: avoid;
+    }
+    
+    .student-card .card-header {
+        background: #f8f9fa !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* Utility Classes */
+.fw-bold {
+    font-weight: 600 !important;
+}
+
+.text-success {
+    color: #2ecc71 !important;
+}
+
+.bg-success {
+    background-color: #2ecc71 !important;
+}
+
+/* Animation for cards */
+.student-card {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.student-card:nth-child(1) { animation-delay: 0.1s; }
+.student-card:nth-child(2) { animation-delay: 0.2s; }
+.student-card:nth-child(3) { animation-delay: 0.3s; }
+.student-card:nth-child(4) { animation-delay: 0.4s; }
+.student-card:nth-child(5) { animation-delay: 0.5s; }
+.student-card:nth-child(6) { animation-delay: 0.6s; }

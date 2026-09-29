@@ -1,0 +1,84 @@
+/* ============================================================
+   ai_features.css — Styles for AI Late Return & Recommendation panels
+   Add this to your assets/css/ folder and link in layout.php:
+     <link rel="stylesheet" href="assets/css/ai_features.css">
+   ============================================================ */
+
+/* ---- AI Card Header Accent ---- */
+.ai-card {
+    position: relative;
+    overflow: hidden;
+}
+.ai-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #7c3aed, #2563eb, #0ea5e9);
+    background-size: 200% 100%;
+    animation: aiGradientShift 4s ease infinite;
+}
+@keyframes aiGradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---- Risk Score Bar Row Highlight ---- */
+tr.risk-high td   { background: rgba(239,68,68,.04); }
+tr.risk-medium td { background: rgba(245,158,11,.04); }
+
+/* ---- AI Badge ---- */
+.badge-ai {
+    background: linear-gradient(135deg, rgba(124,58,237,.15), rgba(37,99,235,.15));
+    color: #7c3aed;
+    border: 1px solid rgba(124,58,237,.2);
+}
+
+/* ---- Recommendation Cards ---- */
+.ai-rec-card {
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+.ai-rec-card:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(37,99,235,.15);
+}
+
+/* ---- Reading Profile Pills ---- */
+#readingProfilePills .genre-pill {
+    background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(14,165,233,.12));
+    color: var(--primary);
+    border: 1px solid rgba(37,99,235,.2);
+    font-size: .8rem;
+    padding: .4rem 1rem;
+    transition: var(--transition);
+}
+#readingProfilePills .genre-pill:hover {
+    background: var(--gradient-primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ---- Threshold bar uses accent gradient ---- */
+#aiThresholdFill {
+    background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+}
+
+/* ---- Reminder log items ---- */
+#reminderLogList .activity-item {
+    padding: 1rem 0;
+}
+
+/* ---- No cover placeholder inside recs ---- */
+.ai-rec-card .no-cover {
+    width: 100%;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 3rem;
+}

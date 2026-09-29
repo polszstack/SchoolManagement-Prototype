@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mozilla+Headline:wght@200..700&display=swap');
+
+/*Layout CSS*/
+@import url('layout/sidebar.css');
+@import url('layout/footer.css');
+@import url('layout/header.css');
+@import url('layout/module-container.css');
+
+/*Pages CSS*/
+/*Pages CSS*/
+@import url('pages/admindashboard.css');
+@import url('pages/admin-reports.css');
+@import url('pages/admin-applications.css');
+@import url('pages/admin-convert.css'); 
+@import url('pages/approval-decision-support.css'); 
+@import url('pages/concerns-issue-tracking.css');
+@import url('pages/report-submission-management.css');/* Add this line */
+
+/*Base CSS*/
+@import url('base/variables.css');
+@import url('base/reset.css');
+@import url('base/global.css');

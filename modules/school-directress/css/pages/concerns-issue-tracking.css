@@ -1,0 +1,520 @@
+/* ============================================================
+School Directress — Concerns & Issue Tracking
+Matches Student Monitoring / User Management styling.
+============================================================ */
+
+/* ── Form Groups ──────────────────────────────────── */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--color2);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color1);
+    box-shadow: 0 0 0 3px rgba(32, 0, 130, 0.08);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ── File Input ───────────────────────────────────── */
+
+.file-btn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color5);
+}
+
+.file-btn::file-selector-button {
+    margin-right: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.file-btn::file-selector-button:hover {
+    background: var(--color7);
+}
+
+/* ── Form Actions ─────────────────────────────────── */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.btn-log {
+    padding: 0.65rem 1.3rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-log:hover {
+    background: var(--color7);
+}
+
+.btn-log:disabled {
+    background: var(--color9);
+    color: var(--color5);
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    padding: 0.65rem 1.3rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color5);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-cancel:hover {
+    border-color: var(--color5);
+    color: var(--color2);
+}
+
+/* ── Issue List Card ───────────────────────────────── */
+
+
+/* ── List Header ──────────────────────────────────── */
+
+.concerns-list-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color3);
+    padding: 1.1rem 1.6rem;
+    border-radius: 10px;
+}
+
+.concerns-list-head h3 {
+    margin: 0;
+    color: var(--color2);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+/* ── Header Actions ───────────────────────────────── */
+
+.concerns-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.concern-add-btn {
+    padding: 0.6rem 1.1rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.concern-add-btn:hover {
+    background: var(--color7);
+}
+
+/* ── Filters ───────────────────────────────────────── */
+
+.concerns-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.concerns-filters select {
+    min-width: 160px;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.concerns-filters select:focus {
+    outline: none;
+    border-color: var(--color1);
+    box-shadow: 0 0 0 3px rgba(32, 0, 130, 0.08);
+}
+
+.concern-search {
+    width: 265px;
+    box-sizing: border-box;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 0.82rem;
+}
+
+.concern-search::placeholder {
+    color: var(--color5);
+}
+
+.concern-search:focus {
+    outline: none;
+    border-color: var(--color1);
+    box-shadow: 0 0 0 3px rgba(32, 0, 130, 0.08);
+}
+
+/* ── Table Wrapper ────────────────────────────────── */
+
+.concern-table-wrapper {
+    width: 100%;
+    border: 1px solid var(--color9);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+/* ── Table ────────────────────────────────────────── */
+
+.concern-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color3);
+}
+
+.concern-table th,
+.concern-table td {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--color9);
+    text-align: left;
+}
+
+.concern-table thead th {
+    color: var(--color5);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.concern-table tbody td {
+    color: var(--color2);
+    font-size: 0.85rem;
+}
+
+.concern-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.concern-table tbody tr:hover {
+    background: rgba(32, 0, 130, 0.02);
+}
+
+.concern-table tbody td[colspan] {
+    padding: 1.5rem;
+    color: var(--color5);
+    text-align: center;
+}
+
+/* ── Actions ──────────────────────────────────────── */
+
+.concern-table th:last-child,
+.concern-table td:last-child {
+    text-align: center;
+}
+
+.concern-table td.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* ── Action Buttons ───────────────────────────────── */
+
+.btn-assign,
+.btn-view {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--color9);
+    border-radius: 7px;
+    background: var(--color3);
+    color: var(--color2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-assign:hover,
+.btn-view:hover {
+    border-color: var(--color1);
+    color: var(--color1);
+}
+
+.btn-update,
+.btn-resolve,
+.btn-reopen {
+    padding: 0.5rem 0.85rem;
+    border: none;
+    border-radius: 7px;
+    background: var(--color1);
+    color: var(--color3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-update:hover,
+.btn-resolve:hover,
+.btn-reopen:hover {
+    background: var(--color7);
+}
+
+.btn-disabled {
+    padding: 0.5rem 0.85rem;
+    border: 1px dashed var(--color9);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--color5);
+    font-size: 0.8rem;
+    cursor: not-allowed;
+}
+
+/* ── Status Badges ────────────────────────────────── */
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--color9);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color5);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.badge-open {
+    border-color: var(--color9);
+    color: var(--color5);
+}
+
+.badge-resolved {
+    border-color: #16a34a;
+    background: rgba(22, 163, 74, 0.08);
+    color: #16a34a;
+}
+
+/* ── Notes ────────────────────────────────────────── */
+
+.concerns-note {
+    margin-top: 1rem;
+}
+
+.muted {
+    color: var(--color5);
+    font-size: 0.82rem;
+}
+
+/* ── Modal ─────────────────────────────────────────── */
+
+.concern-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.concern-modal-overlay.active {
+    display: flex;
+}
+
+.concern-modal {
+    width: 480px;
+    max-width: 92vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.concern-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.6rem;
+    border-bottom: 1px solid var(--color9);
+}
+
+.concern-modal-header h3 {
+    margin: 0;
+    color: var(--color2);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.concern-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color5);
+    cursor: pointer;
+}
+
+.concern-modal-close:hover {
+    color: var(--color2);
+}
+
+.concern-modal-body {
+    padding: 1.6rem;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .concerns-list {
+        padding: 1rem;
+    }
+
+    .concerns-list-head {
+        flex-wrap: wrap;
+    }
+
+    .concerns-header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .concerns-filters {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .concerns-filters select,
+    .concern-search {
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .concern-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .concern-table {
+        min-width: 900px;
+    }
+
+    .concern-table th,
+    .concern-table td {
+        padding: 0.75rem 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .concerns-list {
+        padding: 1rem;
+    }
+
+    .concerns-list-head {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .concerns-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .concerns-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .concerns-filters select,
+    .concern-search {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-log,
+    .btn-cancel {
+        width: 100%;
+    }
+
+    .concern-table td.actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-assign,
+    .btn-update,
+    .btn-view,
+    .btn-resolve,
+    .btn-reopen,
+    .btn-disabled {
+        width: 100%;
+    }
+
+    .concern-modal {
+        width: 94vw;
+    }
+}

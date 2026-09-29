@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mozilla+Headline:wght@200..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+
+:root {
+    --color1: rgba(32, 0, 130, 1); 
+    --color2: rgba(51, 65, 85, 1);
+    --color3: rgba(255, 255, 255, 1);
+    --color4: rgba(186, 186, 186, 1);
+    --color5: rgba(95, 95, 95, 1);
+    --color6: rgba(51, 65, 85, 1);
+    --color7: rgb(81, 70, 183);
+    --color8: rgb(0, 0, 0);
+    --color9: rgba(240, 240, 240, 1);
+    --sidebar-width: 252px;
+    --header-height: 60px;
+}
+
+body {
+    background: var(--color9);
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    height: var(--header-height);
+    background: var(--color3);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+header i {
+    font-size: 1.5rem;
+    color: var(--color8);
+    margin: 1rem;
+    cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--color1);
+    padding: 1.2rem 1.3rem;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+/* Hide sidebar on desktop when toggled */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.school-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.school-logo img {
+    width: 29px;
+    height: auto;
+}
+
+.sidebar-icons {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--color3);
+}
+
+.sidebar-icons i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color6);
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--color2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color3);
+}
+
+.sidebar-header h1 {
+    font-size: 1.3rem;
+    color: var(--color3);
+}
+
+.user-name {
+    font-size: 12px;
+    color: var(--color3);
+    font-weight: bold;
+}
+
+.user-id {
+    font-size: 10px;
+    color: var(--color5);
+    font-weight: bold;
+}
+
+.sidebar h2 {
+    color: var(--color3);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar .menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    color: var(--color3);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar .menu-link i {
+    font-size: 1.1rem;
+    min-width: 20px;
+}
+
+.sidebar .menu-link:hover {
+    background: var(--color7);
+    color: var(--color3);
+    transform: translateX(5px);
+}
+
+.sidebar .menu-link.active {
+    background: var(--color2);
+    color: var(--color3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    padding: 2rem;
+    transition: margin-left 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: var(--color3);
+    color: var(--color2);
+    margin-left: var(--sidebar-width);
+    transition: margin-left 0.3s ease;
+}
+
+/* Container */
+.container {
+    max-width: 1284px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+
+
+/* Hamburger Menu Icon */
+.hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--color8);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.hamburger:hover span {
+    background: var(--color1);
+}
+
+/* Overlay for mobile sidebar */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Scrollbar Hidden */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color4);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color5);
+}
+
+/* Hide scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Large Tablets and Small Desktops (1024px and below) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .module-content {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 0px;
+    }
+    
+    /* Hide sidebar by default on mobile */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    /* Show sidebar when active */
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    /* Adjust header */
+    header {
+        left: 0;
+        width: 100%;
+    }
+    
+    /* Show hamburger menu */
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Adjust main content */
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    /* Adjust footer */
+    footer {
+        margin-left: 0;
+    }
+    
+    /* Adjust module header */
+    .module-header {
+        padding: 1rem;
+        min-height: 80px;
+    }
+    
+    /* Adjust module content */
+    .module-content {
+        padding: 1rem;
+        margin-top: 1rem;
+        min-height: 400px;
+    }
+    
+    .container {
+        padding: 0 0.5rem;
+    }
+}
+
+/* Mobile Phones (480px and below) */
+@media (max-width: 480px) {
+    header {
+        height: 50px;
+    }
+    
+    header div i {
+        font-size: 1.2rem;
+        margin: 0.5rem;
+    }
+    
+    .main-content {
+        margin-top: 50px;
+        padding: 0.75rem;
+        min-height: calc(100vh - 50px);
+    }
+    
+    .module-header {
+        padding: 0.75rem;
+        min-height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    .module-header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .module-content {
+        padding: 0.75rem;
+        min-height: 300px;
+    }
+    
+    .sidebar {
+        width: 280px;
+    }
+    
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .sidebar-header h1 {
+        font-size: 1.1rem;
+    }
+    
+    footer {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Extra Small Devices (360px and below) */
+@media (max-width: 360px) {
+    .sidebar {
+        width: 100%;
+    }
+    
+    .module-header h1 {
+        font-size: 1rem;
+    }
+    
+    .sidebar .menu-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    header,
+    footer,
+    .hamburger {
+        display: none;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        margin-top: 0;
+    }
+}
+
+
+/* Reset the damage done by the * and button selectors */
+.driver-popover * {
+    margin: initial;
+    padding: initial;
+}
+
+.driver-popover button {
+    margin-top: 0 !important; /* Removes that 40px gap */
+}
+

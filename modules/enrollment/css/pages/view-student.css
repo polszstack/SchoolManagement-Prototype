@@ -1,0 +1,28 @@
+.section-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .section-card .section-code {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .section-card .section-name {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    .info-card {
+        border-left: 4px solid #4e73df;
+        background-color: #f8f9fc;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    .badge-section {
+        background-color: #4e73df;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 1rem;
+    }

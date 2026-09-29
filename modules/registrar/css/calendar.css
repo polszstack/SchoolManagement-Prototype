@@ -1,0 +1,19 @@
+.fc .fc-day-today .fc-daygrid-day-number {
+    color: #3bdc35; 
+    font-weight: bold;
+}
+
+.fc .fc-daygrid-day-number {
+    color: #121213; 
+    font-weight: 600;
+}
+
+
+.fc-day-sun .fc-daygrid-day-number {
+    color: #dc3545;
+}
+
+
+.fc .fc-daygrid-day {
+    border: 1px solid #020202;
+}

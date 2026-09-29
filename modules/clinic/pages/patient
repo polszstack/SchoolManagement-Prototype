@@ -1,0 +1,703 @@
+<?php
+include_once __DIR__ . '/../../../database/db.php';
+include_once __DIR__ . '/../classes/student.php';
+
+$studentClass = new Student();
+$allStudents = $studentClass->getAllStudents();
+
+if (!$allStudents) $allStudents = [];
+
+// Get search parameter from URL
+$searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+// Filter students based on search term
+if (!empty($searchTerm)) {
+    $filteredStudents = array_filter($allStudents, function($student) use ($searchTerm) {
+        $searchTermLower = strtolower($searchTerm);
+        return strpos(strtolower($student['student_number']), $searchTermLower) !== false ||
+               strpos(strtolower($student['first_name']), $searchTermLower) !== false ||
+               strpos(strtolower($student['last_name']), $searchTermLower) !== false ||
+               strpos(strtolower($student['course'] ?? ''), $searchTermLower) !== false ||
+               strpos(strtolower($student['email'] ?? ''), $searchTermLower) !== false;
+    });
+    $students = array_values($filteredStudents);
+} else {
+    $students = $allStudents;
+}
+
+// Pagination logic
+$rowsPerPage = 10;
+$totalStudents = count($students);
+$totalPages = ceil($totalStudents / $rowsPerPage);
+$currentPage = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$currentPage = max(1, min($currentPage, $totalPages > 0 ? $totalPages : 1));
+$offset = ($currentPage - 1) * $rowsPerPage;
+$studentsOnPage = array_slice($students, $offset, $rowsPerPage);
+
+// Build pagination URLs with search term
+function buildPaginationUrl($page, $searchTerm) {
+    $params = [];
+    if ($page > 1) $params['page'] = $page;
+    if (!empty($searchTerm)) $params['search'] = urlencode($searchTerm);
+    return '?' . http_build_query($params);
+}
+?>
+
+<div class="module-header">
+    <h1>Patient Information</h1>
+</div>
+
+<div class="module-content">
+
+    <!-- Student Search -->
+    <div class="form-group">
+        <label for="studentID">Search by Student Number, Name, or Course:</label>
+        <div class="search-container">
+            <input type="text" 
+                   id="studentSearch" 
+                   class="search-input" 
+                   placeholder="Enter search term..." 
+                   value="<?= htmlspecialchars($searchTerm) ?>">
+            <button type="button" id="searchBtn" class="btn-primary">Search</button>
+            <button type="button" id="clearBtn" class="btn-secondary">Clear</button>
+        </div>
+    </div>
+
+    <!-- Student Select Dropdown -->
+    <div class="form-group">
+        <label for="studentID">Or Select Student from List:</label>
+        <div class="search-container">
+            <select id="studentID" class="search-select">
+                <option value="">-- Select Student --</option>
+                <?php foreach ($allStudents as $student) : ?>
+                    <option value="<?= htmlspecialchars($student['student_number']) ?>">
+                        <?= htmlspecialchars($student['student_number']) ?> - 
+                        <?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <button type="button" id="selectSearchBtn" class="btn-primary">Load Student</button>
+        </div>
+    </div>
+
+    <!-- Student Edit Form (hidden until search) -->
+    <div id="studentInfo" class="student-info" style="display:none;">
+        <h2>Edit Student Information</h2>
+        <form id="studentForm">
+            <input type="hidden" id="hiddenNumber" name="student_number">
+            <input type="hidden" id="originalNumber" name="original_number">
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="firstName">First Name: <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="first_name" required>
+                </div>
+                <div class="form-col">
+                    <label for="lastName">Last Name: <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="last_name" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="date_of_birth">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., 09123456789">
+                </div>
+                <div class="form-col">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="student@example.com">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="course">Course:</label>
+                    <input type="text" id="course" name="course" placeholder="e.g., BSIT">
+                </div>
+                <div class="form-col">
+                    <label for="yearLevel">Year Level:</label>
+                    <select id="yearLevel" name="year_level">
+                        <option value="">Select Year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                        <option value="5">5th Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-col-full">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter complete address"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Update Student</button>
+                <button type="button" id="cancelEditBtn" class="btn-secondary">Cancel</button>
+            </div>
+        </form>
+        <div id="updateMessage" class="message"></div>
+    </div>
+
+    <!-- Student Records Table (paginated) -->
+    <h2>Student Records <span id="searchTitle"><?= !empty($searchTerm) ? '- Search Results for "' . htmlspecialchars($searchTerm) . '"' : '' ?></span></h2>
+
+    <?php if ($totalStudents > 0): ?>
+    <div class="table-info">
+        <p>Showing <span id="startResult"><?= $offset + 1 ?></span> to <span id="endResult"><?= min($offset + $rowsPerPage, $totalStudents) ?></span> of <span id="totalResults"><?= $totalStudents ?></span> students</p>
+        <div class="table-actions">
+            <button type="button" id="exportBtn" class="btn-secondary">Export to CSV</button>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <div class="table-container">
+        <table id="studentRecords" class="data-table">
+            <thead>
+                <tr>
+                    <th>Student Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <?php if (empty($studentsOnPage)) : ?>
+                    <tr>
+                        <td colspan="11" class="no-data">No students found.</td>
+                    </tr>
+                <?php else : ?>
+                    <?php foreach ($studentsOnPage as $s) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($s['student_number']) ?></td>
+                            <td><?= htmlspecialchars($s['first_name']) ?></td>
+                            <td><?= htmlspecialchars($s['last_name']) ?></td>
+                            <td><?= htmlspecialchars($s['gender'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['date_of_birth'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['phone'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['email'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['course'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['year_level'] ?? '') ?></td>
+                            <td><?= htmlspecialchars($s['address'] ?? '') ?></td>
+                            <td>
+                                <button type="button" class="btn-edit" onclick="editStudent('<?= htmlspecialchars($s['student_number']) ?>')">Edit</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div id="paginationContainer">
+        <?php if ($totalPages > 1) : ?>
+            <div class="pagination">
+                <div class="pagination-info">
+                    Page <span id="currentPage"><?= $currentPage ?></span> of <span id="totalPages"><?= $totalPages ?></span>
+                </div>
+                <div class="pagination-controls">
+                    <?php if ($currentPage > 1) : ?>
+                        <a href="<?= buildPaginationUrl(1, $searchTerm) ?>" class="page-link" title="First Page" data-page="1">««</a>
+                        <a href="<?= buildPaginationUrl($currentPage - 1, $searchTerm) ?>" class="page-link" title="Previous Page" data-page="<?= $currentPage - 1 ?>">«</a>
+                    <?php endif; ?>
+
+                    <?php
+                        $window = 2;
+                        $start  = max(1, $currentPage - $window);
+                        $end    = min($totalPages, $currentPage + $window);
+                        
+                        if ($start > 1) {
+                            echo '<span class="page-ellipsis">...</span>';
+                        }
+                    ?>
+                    
+                    <?php for ($i = $start; $i <= $end; $i++) : ?>
+                        <?php if ($i === $currentPage) : ?>
+                            <span class="page-current"><?= $i ?></span>
+                        <?php else : ?>
+                            <a href="<?= buildPaginationUrl($i, $searchTerm) ?>" class="page-link" data-page="<?= $i ?>"><?= $i ?></a>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                    
+                    <?php if ($end < $totalPages) : ?>
+                        <span class="page-ellipsis">...</span>
+                    <?php endif; ?>
+
+                    <?php if ($currentPage < $totalPages) : ?>
+                        <a href="<?= buildPaginationUrl($currentPage + 1, $searchTerm) ?>" class="page-link" title="Next Page" data-page="<?= $currentPage + 1 ?>">»</a>
+                        <a href="<?= buildPaginationUrl($totalPages, $searchTerm) ?>" class="page-link" title="Last Page" data-page="<?= $totalPages ?>">»»</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+</div>
+
+<script>
+// Global variables
+let currentSearchTerm = '<?= $searchTerm ?>';
+
+// Global function for edit button
+function editStudent(studentNumber) {
+    if (!studentNumber) return;
+    
+    // Set the select dropdown value
+    const select = document.getElementById('studentID');
+    if (select) {
+        select.value = studentNumber;
+    }
+    
+    // Trigger search
+    searchStudent(studentNumber);
+}
+
+// Search function
+function searchStudent(studentNumber) {
+    if (!studentNumber) {
+        alert('Please select a student.');
+        document.getElementById('studentInfo').style.display = 'none';
+        return;
+    }
+
+    // Show loading state
+    const updateMessage = document.getElementById('updateMessage');
+    updateMessage.className = 'message info';
+    updateMessage.style.display = 'block';
+    updateMessage.textContent = 'Loading student data...';
+
+    fetch(`../handlers/get_student.php?student_number=${encodeURIComponent(studentNumber)}`)
+        .then(res => {
+            if (!res.ok) throw new Error('Network response error');
+            return res.json();
+        })
+        .then(student => {
+            if (student && !student.error) {
+                document.getElementById('studentInfo').style.display = 'block';
+                
+                // Fill the form with student data
+                document.getElementById('hiddenNumber').value = student.student_number || '';
+                document.getElementById('originalNumber').value = student.student_number || '';
+                document.getElementById('firstName').value = student.first_name || '';
+                document.getElementById('lastName').value = student.last_name || '';
+                document.getElementById('gender').value = student.gender || '';
+                document.getElementById('dob').value = student.date_of_birth || '';
+                document.getElementById('phone').value = student.phone || '';
+                document.getElementById('email').value = student.email || '';
+                document.getElementById('course').value = student.course || '';
+                document.getElementById('yearLevel').value = student.year_level || '';
+                document.getElementById('address').value = student.address || '';
+
+                // Hide loading message
+                updateMessage.style.display = 'none';
+                
+                // Scroll to form
+                document.getElementById('studentInfo').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Student not found!');
+                document.getElementById('studentInfo').style.display = 'none';
+                updateMessage.style.display = 'none';
+            }
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            alert('Error fetching student data. Please try again.');
+            document.getElementById('studentInfo').style.display = 'none';
+            updateMessage.style.display = 'none';
+        });
+}
+
+// Function to perform search via AJAX
+function performSearch(searchTerm) {
+    // Show loading indicator
+    document.getElementById('tableBody').innerHTML = '<tr><td colspan="11" class="no-data">Searching...</td></tr>';
+    
+    // Update current search term
+    currentSearchTerm = searchTerm;
+    
+    // Get current page
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page') || 1;
+    
+    // Build fetch URL
+    let fetchUrl = `../handlers/search_students.php?search=${encodeURIComponent(searchTerm)}&page=${page}`;
+    
+    fetch(fetchUrl)
+        .then(res => {
+            if (!res.ok) throw new Error('Network response error');
+            return res.json();
+        })
+        .then(data => {
+            // Update table body
+            updateTableBody(data.students);
+            
+            // Update pagination
+            updatePagination(data.currentPage, data.totalPages, data.totalStudents);
+            
+            // Update results info
+            updateResultsInfo(data.start, data.end, data.totalStudents);
+            
+            // Update search title
+            const searchTitle = document.getElementById('searchTitle');
+            if (searchTerm) {
+                searchTitle.textContent = `- Search Results for "${searchTerm}"`;
+            } else {
+                searchTitle.textContent = '';
+            }
+            
+            // Update URL without reloading
+            const url = new URL(window.location.href);
+            if (searchTerm) {
+                url.searchParams.set('search', searchTerm);
+            } else {
+                url.searchParams.delete('search');
+            }
+            url.searchParams.set('page', data.currentPage);
+            window.history.pushState({}, '', url);
+        })
+        .catch(err => {
+            console.error('Error:', err);
+            document.getElementById('tableBody').innerHTML = '<tr><td colspan="11" class="no-data">Error performing search. Please try again.</td></tr>';
+        });
+}
+
+// Function to update table body
+function updateTableBody(students) {
+    const tbody = document.getElementById('tableBody');
+    
+    if (!students || students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" class="no-data">No students found.</td></tr>';
+        return;
+    }
+    
+    let html = '';
+    students.forEach(s => {
+        html += `<tr>
+            <td>${escapeHtml(s.student_number)}</td>
+            <td>${escapeHtml(s.first_name)}</td>
+            <td>${escapeHtml(s.last_name)}</td>
+            <td>${escapeHtml(s.gender || '')}</td>
+            <td>${escapeHtml(s.date_of_birth || '')}</td>
+            <td>${escapeHtml(s.phone || '')}</td>
+            <td>${escapeHtml(s.email || '')}</td>
+            <td>${escapeHtml(s.course || '')}</td>
+            <td>${escapeHtml(s.year_level || '')}</td>
+            <td>${escapeHtml(s.address || '')}</td>
+            <td><button type="button" class="btn-edit" onclick="editStudent('${escapeHtml(s.student_number)}')">Edit</button></td>
+        </tr>`;
+    });
+    
+    tbody.innerHTML = html;
+}
+
+// Function to update pagination
+function updatePagination(currentPage, totalPages, totalStudents) {
+    const container = document.getElementById('paginationContainer');
+    
+    if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let html = `
+        <div class="pagination">
+            <div class="pagination-info">
+                Page ${currentPage} of ${totalPages}
+            </div>
+            <div class="pagination-controls">
+    `;
+    
+    if (currentPage > 1) {
+        html += `<a href="#" class="page-link" title="First Page" onclick="changePage(1); return false;">««</a>`;
+        html += `<a href="#" class="page-link" title="Previous Page" onclick="changePage(${currentPage - 1}); return false;">«</a>`;
+    }
+    
+    const window = 2;
+    const start = Math.max(1, currentPage - window);
+    const end = Math.min(totalPages, currentPage + window);
+    
+    if (start > 1) {
+        html += '<span class="page-ellipsis">...</span>';
+    }
+    
+    for (let i = start; i <= end; i++) {
+        if (i === currentPage) {
+            html += `<span class="page-current">${i}</span>`;
+        } else {
+            html += `<a href="#" class="page-link" onclick="changePage(${i}); return false;">${i}</a>`;
+        }
+    }
+    
+    if (end < totalPages) {
+        html += '<span class="page-ellipsis">...</span>';
+    }
+    
+    if (currentPage < totalPages) {
+        html += `<a href="#" class="page-link" title="Next Page" onclick="changePage(${currentPage + 1}); return false;">»</a>`;
+        html += `<a href="#" class="page-link" title="Last Page" onclick="changePage(${totalPages}); return false;">»»</a>`;
+    }
+    
+    html += '</div></div>';
+    container.innerHTML = html;
+}
+
+// Function to update results info
+function updateResultsInfo(start, end, total) {
+    const startSpan = document.getElementById('startResult');
+    const endSpan = document.getElementById('endResult');
+    const totalSpan = document.getElementById('totalResults');
+    
+    if (startSpan && endSpan && totalSpan) {
+        startSpan.textContent = start;
+        endSpan.textContent = end;
+        totalSpan.textContent = total;
+    }
+}
+
+// Function to change page
+function changePage(page) {
+    performSearch(currentSearchTerm, page);
+}
+
+// Function to escape HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Search button click - using AJAX
+document.getElementById('searchBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const searchTerm = document.getElementById('studentSearch').value.trim();
+    performSearch(searchTerm);
+});
+
+// Search by select button
+document.getElementById('selectSearchBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const studentNumber = document.getElementById('studentID').value.trim();
+    searchStudent(studentNumber);
+});
+
+// Enter key in search field
+document.getElementById('studentSearch').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        e.stopPropagation();
+        document.getElementById('searchBtn').click();
+    }
+});
+
+// Clear button
+document.getElementById('clearBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('studentSearch').value = '';
+    document.getElementById('studentID').value = '';
+    document.getElementById('studentInfo').style.display = 'none';
+    document.getElementById('updateMessage').style.display = 'none';
+    
+    // Perform search with empty term to reset
+    performSearch('');
+});
+
+// Cancel edit button
+document.getElementById('cancelEditBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('studentInfo').style.display = 'none';
+    document.getElementById('studentID').value = '';
+});
+
+// Form submission
+document.getElementById('studentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Validate required fields
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    
+    if (!firstName || !lastName) {
+        alert('First name and last name are required.');
+        return;
+    }
+
+    // Validate email format if provided
+    const email = document.getElementById('email').value.trim();
+    if (email && !isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    // Validate phone format if provided
+    const phone = document.getElementById('phone').value.trim();
+    if (phone && !isValidPhone(phone)) {
+        alert('Please enter a valid phone number (10-15 digits).');
+        return;
+    }
+
+    const data = {
+        original_number: document.getElementById('originalNumber').value,
+        student_number: document.getElementById('hiddenNumber').value,
+        first_name: firstName,
+        last_name: lastName,
+        gender: document.getElementById('gender').value,
+        date_of_birth: document.getElementById('dob').value,
+        phone: phone,
+        email: email,
+        course: document.getElementById('course').value.trim(),
+        year_level: document.getElementById('yearLevel').value,
+        address: document.getElementById('address').value.trim()
+    };
+
+    // Show loading state
+    const updateMessage = document.getElementById('updateMessage');
+    updateMessage.className = 'message info';
+    updateMessage.style.display = 'block';
+    updateMessage.textContent = 'Updating student record...';
+
+    fetch('../handlers/update_student.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Update failed');
+        return res.json();
+    })
+    .then(result => {
+        if (result.success) {
+            updateMessage.className = 'message success';
+            updateMessage.textContent = 'Student updated successfully!';
+            
+            // Refresh the current search
+            setTimeout(() => {
+                performSearch(currentSearchTerm);
+                document.getElementById('studentInfo').style.display = 'none';
+            }, 1500);
+        } else {
+            updateMessage.className = 'message error';
+            updateMessage.textContent = result.message || 'Update failed. Please try again.';
+        }
+    })
+    .catch(err => {
+        console.error('Error:', err);
+        updateMessage.className = 'message error';
+        updateMessage.textContent = 'Server error. Please try again.';
+    });
+});
+
+// Export to CSV function
+document.getElementById('exportBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const rows = document.querySelectorAll('#tableBody tr');
+    if (rows.length === 0 || rows[0].classList.contains('no-data')) {
+        alert('No data to export.');
+        return;
+    }
+    
+    let csv = [];
+    
+    // Get headers
+    const headers = [];
+    document.querySelectorAll('#studentRecords thead th').forEach(th => {
+        if (th.textContent !== 'Actions') {
+            headers.push(th.textContent);
+        }
+    });
+    csv.push(headers.join(','));
+    
+    // Get data rows
+    rows.forEach(row => {
+        const rowData = [];
+        const cells = row.querySelectorAll('td');
+        for (let i = 0; i < cells.length - 1; i++) { // Exclude Actions column
+            let cellText = cells[i].textContent;
+            // Escape commas and quotes
+            if (cellText.includes(',') || cellText.includes('"') || cellText.includes('\n')) {
+                cellText = '"' + cellText.replace(/"/g, '""') + '"';
+            }
+            rowData.push(cellText);
+        }
+        csv.push(rowData.join(','));
+    });
+    
+    // Download CSV
+    const csvContent = csv.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'student_records.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
+// Utility functions
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function isValidPhone(phone) {
+    const re = /^[0-9+\-\s]{10,15}$/;
+    return re.test(phone);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide student info on initial load
+    document.getElementById('studentInfo').style.display = 'none';
+    
+    // Prevent any default form submissions that might cause redirects
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+    
+    // Prevent any link clicks from causing page reload
+    document.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    });
+});
+</script>

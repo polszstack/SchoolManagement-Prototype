@@ -1,0 +1,13 @@
+import './layout/hamburger.js';
+import './utils/page-switcher.js';
+import './layout/tab-content.js';
+import './layout/realtime.js';
+import './components/dropdown.js';
+import './modules/report.js';
+import './modules/issue.js';
+import './modules/approval.js';
+import './modules/students.js';
+import './modules/cases.js';
+import './modules/appointments.js';
+import './modules/incidents.js';
+import './modules/analytics.js';

@@ -1,0 +1,500 @@
+<?php
+include_once __DIR__ . '/../../../database/db.php';
+include_once __DIR__ . '/../classes/student.php';
+
+$studentClass = new Student();
+$students = $studentClass->getAllStudents();
+if (!$students) $students = [];
+?>
+
+<div class="module-header">
+    <h1>Clinic Visit & Consultation</h1>
+</div>
+
+<div class="module-content">
+    
+    <!-- Result Section -->
+    <div id="result" class="result" style="display:none;">
+        <h2>Last Submitted Appointment</h2>
+        <div id="resultContent"></div>
+        <button type="button" id="closeResultBtn" class="close-btn">Close</button>
+    </div>
+
+    <!-- Student Number Search -->
+    <div class="form-group">
+        <label for="studentNumber">Enter Student Number:</label>
+        <input type="text" id="studentNumber" name="studentNumber" placeholder="Enter Student Number">
+        <button type="button" id="searchBtn">Search</button>
+        <button type="button" id="clearBtn">Clear</button>
+    </div>
+
+    <!-- Student Select Dropdown (shown after search or directly pick) -->
+    <div class="form-group" id="studentSelectGroup">
+        <label for="studentSelect">Select Student:</label>
+        <select id="studentSelect">
+            <option value="">-- Select a Student --</option>
+            <?php foreach ($students as $student) : ?>
+                <option 
+                    value="<?= htmlspecialchars($student['student_number']) ?>"
+                    data-firstname="<?= htmlspecialchars($student['first_name']) ?>"
+                    data-lastname="<?= htmlspecialchars($student['last_name']) ?>"
+                    data-gender="<?= htmlspecialchars($student['gender'] ?? '') ?>"
+                    data-birthdate="<?= htmlspecialchars($student['date_of_birth'] ?? '') ?>"
+                    data-course="<?= htmlspecialchars($student['course'] ?? '') ?>"
+                    data-yearlevel="<?= htmlspecialchars($student['year_level'] ?? '') ?>"
+                >
+                    <?= htmlspecialchars($student['student_number']) ?> - 
+                    <?= htmlspecialchars($student['first_name'] . ' ' . $student['last_name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <!-- Clinic Form -->
+    <form id="clinicForm">
+
+        <!-- Patient Information -->
+        <div class="module-content">
+            <fieldset>
+                <legend>Patient Information</legend>
+
+                <label for="studentNumberDisplay">Student Number:</label>
+                <input type="text" id="studentNumberDisplay" name="studentNumberDisplay" readonly>
+
+                <label for="patientName">Full Name:</label>
+                <input type="text" id="patientName" name="patientName" required readonly>
+
+                <label for="patientAge">Age:</label>
+                <input type="text" id="patientAge" name="patientAge" readonly>
+
+                <label for="patientGender">Gender:</label>
+                <input type="text" id="patientGender" name="patientGender" readonly>
+
+                <label for="patientCourse">Course:</label>
+                <input type="text" id="patientCourse" name="patientCourse" readonly>
+
+                <label for="patientYearLevel">Year Level:</label>
+                <input type="text" id="patientYearLevel" name="patientYearLevel" readonly>
+            </fieldset>
+
+            <!-- Vital Signs -->
+            <fieldset>
+                <legend>Vital Signs</legend>
+
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" step="0.1" min="35" max="42" placeholder="36.5" disabled>
+
+                <label for="bloodPressure">Blood Pressure (mmHg):</label>
+                <input type="text" id="bloodPressure" name="bloodPressure" placeholder="120/80" disabled>
+
+                <label for="heartRate">Heart Rate (bpm):</label>
+                <input type="number" id="heartRate" name="heartRate" min="40" max="200" placeholder="75" disabled>
+
+                <label for="respiratoryRate">Respiratory Rate (breaths/min):</label>
+                <input type="number" id="respiratoryRate" name="respiratoryRate" min="8" max="40" placeholder="16" disabled>
+
+                <label for="oxygenSaturation">Oxygen Saturation (%):</label>
+                <input type="number" id="oxygenSaturation" name="oxygenSaturation" min="70" max="100" placeholder="98" disabled>
+            </fieldset>
+
+            <!-- Appointment Details -->
+            <fieldset>
+                <legend>Appointment Details</legend>
+
+                <label for="nurse">Nurse:</label>
+                <select id="nurse" name="nurse" required disabled>
+                    <option value="">Select Nurse</option>
+                    <option value="Nurse Maria carla serenas">Nurse serenas</option>
+                    <option value="Nurse John Dela Cruz">Nurse John Dela Cruz</option>
+                    <option value="Nurse Ana Reyes">Nurse Ana Reyes</option>
+                    <option value="Nurse Michael Tan">Nurse Michael Tan</option>
+                </select>
+
+                <label for="visitType">Visit Type:</label>
+                <select id="visitType" name="visitType" required disabled>
+                    <option value="">Select Visit Type</option>
+                    <option value="Check-up">Check-up</option>
+                    <option value="Consultation">Consultation</option>
+                    <option value="Emergency">Emergency</option>
+                    <option value="Follow-up">Follow-up</option>
+                    <option value="Medication">Medication</option>
+                </select>
+
+                <label for="appointmentDate">Date:</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required disabled>
+
+                <label for="appointmentTime">Time:</label>
+                <input type="time" id="appointmentTime" name="appointmentTime" required disabled>
+            </fieldset>
+
+            <!-- Consultation Notes -->
+            <fieldset>
+                <legend>Consultation Notes</legend>
+                <label for="symptoms">Symptoms:</label>
+                <textarea id="symptoms" name="symptoms" rows="3" placeholder="Enter patient's symptoms..." disabled></textarea>
+
+                <label for="diagnosis">Diagnosis:</label>
+                <textarea id="diagnosis" name="diagnosis" rows="3" placeholder="Enter diagnosis..." disabled></textarea>
+
+                <label for="treatment">Treatment/Medication:</label>
+                <textarea id="treatment" name="treatment" rows="3" placeholder="Enter treatment or medication prescribed..." disabled></textarea>
+
+                <label for="notes">Additional Notes:</label>
+                <textarea id="notes" name="notes" rows="2" placeholder="Enter additional notes..." disabled></textarea>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" id="submitBtn" disabled>Submit Consultation</button>
+                <button type="button" id="resetFormBtn">Reset Form</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#clearBtn, #resetFormBtn, #closeResultBtn {
+    background-color: #f44336;
+}
+
+#clearBtn:hover, #resetFormBtn:hover, #closeResultBtn:hover {
+    background-color: #da190b;
+}
+
+.close-btn {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #2196F3;
+}
+
+.close-btn:hover {
+    background-color: #0b7dda;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: #333;
+    padding: 0 10px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[readonly] {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.result {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #155724;
+}
+
+.result h2 {
+    margin-top: 0;
+}
+</style>
+
+<script>
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    // Calculate age from a birthdate string (YYYY-MM-DD)
+    function calculateAge(birthdate) {
+        if (!birthdate) return '';
+        const today = new Date();
+        const dob   = new Date(birthdate);
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) age--;
+        return age;
+    }
+
+    // Set today's date as default for appointment date
+    function setDefaultDate() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('appointmentDate').value = today;
+    }
+
+    // Set default time (current time)
+    function setDefaultTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById('appointmentTime').value = `${hours}:${minutes}`;
+    }
+
+    // Fill the Patient Information fields from a data object
+    function fillPatientInfo(data) {
+        document.getElementById('studentNumberDisplay').value = data.student_number ?? '';
+        document.getElementById('patientName').value = (data.first_name + ' ' + data.last_name).trim();
+        document.getElementById('patientGender').value = data.gender ?? '';
+        document.getElementById('patientCourse').value = data.course ?? '';
+        document.getElementById('patientYearLevel').value = data.year_level ?? '';
+        document.getElementById('patientAge').value = calculateAge(data.birthdate);
+
+        // Unlock all form fields
+        enableFormFields(true);
+        
+        // Set default date and time
+        setDefaultDate();
+        setDefaultTime();
+    }
+
+    function enableFormFields(enabled) {
+        const fields = [
+            'temperature', 'bloodPressure', 'heartRate', 'respiratoryRate', 
+            'oxygenSaturation', 'nurse', 'visitType', 'appointmentDate', 
+            'appointmentTime', 'symptoms', 'diagnosis', 'treatment', 'notes',
+            'submitBtn'
+        ];
+        
+        fields.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.disabled = !enabled;
+            }
+        });
+    }
+
+    function resetForm() {
+        // Clear patient info
+        ['studentNumberDisplay', 'patientName', 'patientAge',
+         'patientGender', 'patientCourse', 'patientYearLevel'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) element.value = '';
+        });
+        
+        // Clear vital signs
+        ['temperature', 'bloodPressure', 'heartRate', 'respiratoryRate', 'oxygenSaturation'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) element.value = '';
+        });
+        
+        // Clear appointment details
+        document.getElementById('nurse').value = '';
+        document.getElementById('visitType').value = '';
+        document.getElementById('appointmentDate').value = '';
+        document.getElementById('appointmentTime').value = '';
+        
+        // Clear notes
+        document.getElementById('symptoms').value = '';
+        document.getElementById('diagnosis').value = '';
+        document.getElementById('treatment').value = '';
+        document.getElementById('notes').value = '';
+        
+        // Clear student select
+        document.getElementById('studentSelect').value = '';
+        document.getElementById('studentNumber').value = '';
+        
+        // Disable all form fields
+        enableFormFields(false);
+    }
+
+    // ── Search by typed student number ───────────────────────────────────────
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        const studentNumber = document.getElementById('studentNumber').value.trim();
+
+        if (!studentNumber) {
+            alert('Please enter a student number.');
+            return;
+        }
+
+        // Try to match from the already-loaded <select> options
+        const select = document.getElementById('studentSelect');
+        const options = Array.from(select.options);
+        const match = options.find(opt => opt.value === studentNumber);
+
+        if (match) {
+            select.value = studentNumber;
+
+            fillPatientInfo({
+                student_number: match.value,
+                first_name: match.dataset.firstname,
+                last_name: match.dataset.lastname,
+                gender: match.dataset.gender,
+                birthdate: match.dataset.birthdate,
+                course: match.dataset.course,
+                year_level: match.dataset.yearlevel,
+            });
+        } else {
+            alert('Student not found.');
+            resetForm();
+        }
+    });
+
+    // ── Clear button ─────────────────────────────────────────────────────────
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        document.getElementById('studentNumber').value = '';
+        resetForm();
+    });
+
+    // ── Select box change — pick student directly from dropdown ──────────────
+    document.getElementById('studentSelect').addEventListener('change', function() {
+        const selected = this.options[this.selectedIndex];
+
+        if (!selected.value) {
+            resetForm();
+            return;
+        }
+
+        document.getElementById('studentNumber').value = selected.value;
+
+        fillPatientInfo({
+            student_number: selected.value,
+            first_name: selected.dataset.firstname,
+            last_name: selected.dataset.lastname,
+            gender: selected.dataset.gender,
+            birthdate: selected.dataset.birthdate,
+            course: selected.dataset.course,
+            year_level: selected.dataset.yearlevel,
+        });
+    });
+
+    // ── Reset Form button ────────────────────────────────────────────────────
+    document.getElementById('resetFormBtn').addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset the form?')) {
+            resetForm();
+        }
+    });
+
+    // ── Close Result button ──────────────────────────────────────────────────
+    document.getElementById('closeResultBtn').addEventListener('click', () => {
+        document.getElementById('result').style.display = 'none';
+    });
+
+    // ── Form submission ───────────────────────────────────────────────────────
+    const form = document.getElementById('clinicForm');
+    const resultDiv = document.getElementById('result');
+    const resultContent = document.getElementById('resultContent');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Validate required fields
+        const patientName = document.getElementById('patientName').value;
+        const nurse = document.getElementById('nurse').value;
+        const visitType = document.getElementById('visitType').value;
+        const appointmentDate = document.getElementById('appointmentDate').value;
+        const appointmentTime = document.getElementById('appointmentTime').value;
+
+        if (!patientName || !nurse || !visitType || !appointmentDate || !appointmentTime) {
+            alert('Please fill in all required fields (Patient, Nurse, Visit Type, Date, and Time)!');
+            return;
+        }
+
+        // Gather all form data for display
+        const temperature = document.getElementById('temperature').value || 'Not recorded';
+        const bloodPressure = document.getElementById('bloodPressure').value || 'Not recorded';
+        const heartRate = document.getElementById('heartRate').value || 'Not recorded';
+        const respiratoryRate = document.getElementById('respiratoryRate').value || 'Not recorded';
+        const oxygenSaturation = document.getElementById('oxygenSaturation').value || 'Not recorded';
+        const symptoms = document.getElementById('symptoms').value || 'None reported';
+        const diagnosis = document.getElementById('diagnosis').value || 'Not specified';
+        const treatment = document.getElementById('treatment').value || 'None prescribed';
+        const notes = document.getElementById('notes').value || 'None';
+
+        resultContent.innerHTML = `
+            <p><strong>Patient:</strong> ${patientName} (${document.getElementById('patientGender').value}, ${document.getElementById('patientAge').value} yrs)</p>
+            <p><strong>Student #:</strong> ${document.getElementById('studentNumberDisplay').value}</p>
+            <p><strong>Course & Year:</strong> ${document.getElementById('patientCourse').value} - ${document.getElementById('patientYearLevel').value}</p>
+            <hr>
+            <p><strong>Nurse:</strong> ${nurse}</p>
+            <p><strong>Visit Type:</strong> ${visitType}</p>
+            <p><strong>Date & Time:</strong> ${appointmentDate} at ${appointmentTime}</p>
+            <hr>
+            <p><strong>Vital Signs:</strong></p>
+            <ul>
+                <li>Temperature: ${temperature} °C</li>
+                <li>Blood Pressure: ${bloodPressure} mmHg</li>
+                <li>Heart Rate: ${heartRate} bpm</li>
+                <li>Respiratory Rate: ${respiratoryRate} breaths/min</li>
+                <li>Oxygen Saturation: ${oxygenSaturation}%</li>
+            </ul>
+            <hr>
+            <p><strong>Symptoms:</strong> ${symptoms}</p>
+            <p><strong>Diagnosis:</strong> ${diagnosis}</p>
+            <p><strong>Treatment/Medication:</strong> ${treatment}</p>
+            <p><strong>Additional Notes:</strong> ${notes}</p>
+        `;
+        
+        resultDiv.style.display = 'block';
+        
+        // Optional: Scroll to result
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+
+        // Reset the form after successful submission
+        resetForm();
+    });
+
+    // Initialize: make sure form is disabled on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        enableFormFields(false);
+        
+        // Add input validation for blood pressure format
+        document.getElementById('bloodPressure').addEventListener('input', function(e) {
+            const value = e.target.value;
+            if (value && !/^\d{2,3}\/\d{2,3}$/.test(value)) {
+                e.target.setCustomValidity('Please use format: 120/80');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,173 @@
+/* ============================================================
+   School Directress — Dashboard Overview
+   Restyled to match the Guidance Module's dashboard language:
+   label-above-number cards, no card icons, quiet status pills.
+   Targets the existing markup as-is — no HTML changes needed.
+   ============================================================ */
+
+/* ── Welcome Banner ────────────────────────────── */
+.welcome-banner {
+    background: var(--color1);
+    border-radius: 10px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-banner::before {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    right: -60px;
+    top: -90px;
+}
+
+.welcome-text h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color3);
+    margin: 0 0 0.25rem 0;
+}
+
+.welcome-text p {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+}
+
+.welcome-date {
+    text-align: right;
+    z-index: 1;
+}
+
+.welcome-date .date-day {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1;
+}
+
+.welcome-date .date-month {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+}
+
+/* ── Section Label ─────────────────────────────── */
+.cards-section-label {
+    font-size: 0.67rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color5);
+    margin: 0 0 0.8rem 0;
+}
+
+/* ── Grid ───────────────────────────────────────── */
+.summary-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+/* ── Card Base ──────────────────────────────────── */
+/* Guidance-style card: quiet border, no color bar, no icon.
+   Flex column + order lets us keep the existing DOM order
+   (icon, value, label, badge) while presenting label-above-number. */
+.summary-card {
+    background: var(--color3);
+    border: 1px solid var(--color9);
+    border-radius: 10px;
+    padding: 1.1rem 1.35rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(32, 0, 130, 0.08);
+}
+
+/* All accent variants render as the same quiet white card —
+   Guidance doesn't color-code cards by category, only by real alerts. */
+.card-accent-primary,
+.card-accent-secondary,
+.card-accent-muted,
+.card-accent-danger {
+    border-left: none;
+}
+
+/* ── Icon (hidden — Guidance dashboard cards carry no icon) ── */
+.card-icon-wrap {
+    display: none;
+}
+
+/* ── Card Text ──────────────────────────────────── */
+.card-label {
+    order: 1;
+    font-size: 0.67rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color5);
+    margin-bottom: 0.55rem;
+}
+
+.card-value {
+    order: 2;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--color2);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+/* Real alerts still get a colored number, same as Guidance's
+   red "High-Risk Students" count — no badge needed to notice it. */
+.card-accent-danger .card-value {
+    color: var(--color10);
+}
+
+/* ── Badge (quiet pill, top-right corner) ────────── */
+.card-badge {
+    order: 3;
+    position: absolute;
+    top: 1rem;
+    right: 1.1rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 0.17rem 0.55rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.badge-alert { background: rgba(229, 62, 62, 0.1);  color: var(--color10); }
+.badge-ok    { background: rgba(22, 163, 74, 0.1);  color: #16a34a; }
+.badge-warn  { background: rgba(217, 119, 6, 0.1);  color: #d97706; }
+.badge-info  { background: rgba(32, 0, 130, 0.08);  color: var(--color1); }
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 1200px) {
+    .summary-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .summary-cards-grid { grid-template-columns: 1fr; }
+    .welcome-banner      { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .welcome-date        { text-align: left; }
+}

@@ -1,0 +1,1186 @@
+/* =====================================================
+   STUDENT ACADEMIC MONITORING MODULE - PROFESSIONAL CSS
+   ===================================================== */
+
+:root {
+    --primary: #1e3a8a;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e40af;
+    --secondary: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #0ea5e9;
+    --light: #f8fafc;
+    --border: #e2e8f0;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-monitoring-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0;
+}
+
+/* =====================================================
+   TOP BAR AND NAVIGATION
+   ===================================================== */
+
+.student-monitoring-top-bar {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.breadcrumb .active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* =====================================================
+   CONTAINER AND LAYOUT
+   ===================================================== */
+
+.student-monitoring-container {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* =====================================================
+   FILTER SECTION
+   ===================================================== */
+
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.filter-header {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--info) 100%);
+    color: white;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.filter-header h3 {
+    margin: 0;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-select,
+.filter-input {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    background: white;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.filter-select {
+    cursor: pointer;
+}
+
+.filter-select:hover,
+.filter-input:hover {
+    border-color: var(--primary-light);
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.filter-input::placeholder {
+    color: var(--text-light);
+}
+
+/* =====================================================
+   STATISTICS CARDS
+   ===================================================== */
+
+.statistics-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* =====================================================
+   BUTTON STYLES
+   ===================================================== */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--light);
+    color: var(--text-dark);
+    border: 2px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+}
+
+/* =====================================================
+   MONITORING TABLE SECTION
+   ===================================================== */
+
+.monitoring-table-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.section-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.total-records {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* =====================================================
+   STUDENT MONITORING TABLE
+   ===================================================== */
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.student-monitoring-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-monitoring-table thead {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.student-monitoring-table th {
+    padding: 1.25rem;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+}
+
+.student-monitoring-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.student-monitoring-table tbody tr:hover {
+    background: linear-gradient(90deg, var(--light) 0%, white 100%);
+}
+
+.student-monitoring-table td {
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* Status Badge Styling */
+.status-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.status-badge.regular {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+}
+
+.status-badge.probation {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+}
+
+.status-badge.at-risk {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #7f1d1d;
+}
+
+.gpa-value {
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+    padding: 0.4rem 0.8rem;
+    background: var(--light);
+    border-radius: 6px;
+}
+
+.gpa-value.high {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+}
+
+.gpa-value.medium {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #92400e;
+}
+
+.gpa-value.low {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #7f1d1d;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--info);
+    color: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #0284c7;
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   MODAL STYLES
+   ===================================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-content.modal-large {
+    max-width: 900px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close::before {
+    content: '✕';
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: var(--light);
+}
+
+/* Modal Sections */
+.details-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.details-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.details-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.details-section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 2px;
+}
+
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.info-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    padding: 0.75rem;
+    background: var(--light);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary-light);
+}
+
+/* Academic Summary Grid */
+.academic-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.summary-box {
+    background: linear-gradient(135deg, var(--light) 0%, #e0e7ff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.summary-box:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.75rem;
+}
+
+.summary-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Grades Table */
+.grades-table-wrapper {
+    overflow-x: auto;
+}
+
+.grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.grades-table thead {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.grades-table th {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--border);
+}
+
+.grades-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.grades-table tbody tr:hover {
+    background: var(--light);
+}
+
+.grade-value {
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    min-width: 50px;
+    text-align: center;
+    padding: 0.3rem 0.6rem;
+    background: white;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+}
+
+.grade-value.passed {
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.grade-value.failed {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.remarks-cell {
+    font-weight: 600;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+}
+
+.remarks-passed {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+}
+
+.remarks-failed {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #7f1d1d;
+}
+
+/* Status Information Box */
+.status-info-box {
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--info);
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.status-info-box.regular {
+    border-left-color: var(--success);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.status-info-box.probation {
+    border-left-color: var(--warning);
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.status-info-box.at-risk {
+    border-left-color: var(--danger);
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+}
+
+.status-info-text {
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.status-info-text strong {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* =====================================================
+   TOAST NOTIFICATION
+   ===================================================== */
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    display: none;
+    gap: 1rem;
+    align-items: center;
+    min-width: 300px;
+    z-index: 2000;
+    animation: slideInRight 0.3s ease;
+    border-left: 4px solid var(--info);
+}
+
+.toast.active {
+    display: flex;
+}
+
+.toast.success {
+    border-left-color: var(--success);
+}
+
+.toast.error {
+    border-left-color: var(--danger);
+}
+
+.toast.warning {
+    border-left-color: var(--warning);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-message {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Tablet - 1024px and below */
+@media (max-width: 1024px) {
+    .student-monitoring-top-bar {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .filters-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .statistics-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1.25rem;
+    }
+
+    .student-monitoring-table th,
+    .student-monitoring-table td {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .modal-content.modal-large {
+        max-width: 800px;
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .student-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .academic-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Medium - 768px and below */
+@media (max-width: 768px) {
+    .student-monitoring-container {
+        padding: 1rem;
+    }
+
+    .filters-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .filter-header {
+        padding: 1rem;
+    }
+
+    .statistics-section {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .student-monitoring-table {
+        font-size: 0.8rem;
+    }
+
+    .student-monitoring-table th,
+    .student-monitoring-table td {
+        padding: 0.6rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .modal-content.modal-large {
+        max-width: 90%;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        padding: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .student-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .info-value {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .academic-summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .summary-box {
+        padding: 1rem;
+    }
+
+    .summary-value {
+        font-size: 1.5rem;
+    }
+
+    .grades-table th,
+    .grades-table td {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .status-badge {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .toast {
+        right: 1rem;
+        bottom: 1rem;
+        min-width: 250px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+    .student-monitoring-top-bar {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.25rem;
+    }
+
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+
+    .student-monitoring-container {
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+
+    .filters-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .filter-header {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .statistics-section {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .stat-card {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .student-monitoring-table th {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+    }
+
+    .student-monitoring-table td {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .status-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+    }
+
+    .action-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1rem;
+    }
+
+    .modal-content.modal-large {
+        max-width: 100%;
+        max-height: 95vh;
+    }
+
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .modal-body {
+        padding: 0.75rem;
+    }
+
+    .details-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .details-section-title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .student-info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .info-value {
+        font-size: 0.85rem;
+        padding: 0.4rem;
+    }
+
+    .academic-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .summary-box {
+        padding: 0.75rem;
+    }
+
+    .summary-value {
+        font-size: 1.25rem;
+    }
+
+    .grades-table th,
+    .grades-table td {
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .gpa-value {
+        font-size: 0.85rem;
+        min-width: 50px;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .toast {
+        right: 0.5rem;
+        bottom: 0.5rem;
+        left: 0.5rem;
+        min-width: auto;
+        width: auto;
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra Small - 360px and below */
+@media (max-width: 360px) {
+    .student-monitoring-top-bar {
+        padding: 0.75rem;
+    }
+
+    .page-title {
+        font-size: 1rem;
+    }
+
+    .filters-grid {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .statistics-section {
+        gap: 0.25rem;
+    }
+
+    .stat-card {
+        padding: 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 1rem;
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .student-monitoring-table th,
+    .student-monitoring-table td {
+        padding: 0.4rem;
+        font-size: 0.65rem;
+    }
+
+    .modal-body {
+        padding: 0.5rem;
+    }
+
+    .details-section {
+        margin-bottom: 1rem;
+    }
+
+    .details-section-title {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* =====================================================
+   UTILITY CLASSES
+   ===================================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+
+.hidden {
+    display: none !important;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
